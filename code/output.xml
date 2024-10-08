@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.10.6 on linux)" generated="20230510 09:39:17.518" rpa="false" schemaversion="3">
+<suite id="s1" name="Week10" source="/home/temi/EPFL/ProjProgSys/pps23-projet-t_t/provided/tests/end-to-end/week10.robot">
+<test id="s1-t1" name="Available commands" line="21">
+<kw name="Check Available Commands" library="keyword">
+<arg>sb</arg>
+<arg>inode</arg>
+<arg>cat1\\s+&lt;.+?&gt;</arg>
+<arg>shafiles</arg>
+<arg>tree</arg>
+<arg>fuse\\s+&lt;.+?&gt;</arg>
+<arg>bm</arg>
+<kw name="U6fs Run" library="U6fsUtils">
+<var>${res}</var>
+<doc>Run the u6fs executable and gives the arguments as parameters.</doc>
+<msg timestamp="20230510 09:39:17.562" level="INFO">Starting process:
+./u6fs</msg>
+<msg timestamp="20230510 09:39:17.564" level="INFO">Waiting for process to complete.</msg>
+<msg timestamp="20230510 09:39:17.572" level="INFO">Process completed.</msg>
+<msg timestamp="20230510 09:39:17.572" level="INFO">${res} = &lt;result object with rc 129&gt;</msg>
+<status status="PASS" starttime="20230510 09:39:17.562" endtime="20230510 09:39:17.572"/>
+</kw>
+<kw name="Compare Exit Code" library="Errors">
+<arg>${res}</arg>
+<arg>ERR_INVALID_COMMAND</arg>
+<doc>Compares the given error code with the ordinal of the enum value
+:param: res, result object returned by the program
+:param: enum_name, str (eg. ERR_NONE)</doc>
+<status status="PASS" starttime="20230510 09:39:17.573" endtime="20230510 09:39:17.574"/>
+</kw>
+<kw name="Should Start With" library="BuiltIn">
+<arg>${res.stdout}</arg>
+<arg>Available commands:\n</arg>
+<doc>Fails if the string ``str1`` does not start with the string ``str2``.</doc>
+<status status="PASS" starttime="20230510 09:39:17.574" endtime="20230510 09:39:17.574"/>
+</kw>
+<for flavor="IN">
+<var>${reg}</var>
+<value>@{regexps}</value>
+<iter>
+<var name="${reg}">sb</var>
+<kw name="Convert Regexp" library="Utils">
+<var>${reg}</var>
+<arg>${reg}</arg>
+<msg timestamp="20230510 09:39:17.575" level="INFO">${reg} = \./u6fs &lt;disk&gt; sb</msg>
+<status status="PASS" starttime="20230510 09:39:17.575" endtime="20230510 09:39:17.575"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${reg}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230510 09:39:17.575" level="INFO">\./u6fs &lt;disk&gt; sb</msg>
+<status status="PASS" starttime="20230510 09:39:17.575" endtime="20230510 09:39:17.575"/>
+</kw>
+<kw name="Should Match Regexp" library="BuiltIn">
+<arg>${res.stdout}</arg>
+<arg>${reg}</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="PASS" starttime="20230510 09:39:17.575" endtime="20230510 09:39:17.576"/>
+</kw>
+<status status="PASS" starttime="20230510 09:39:17.575" endtime="20230510 09:39:17.576"/>
+</iter>
+<iter>
+<var name="${reg}">inode</var>
+<kw name="Convert Regexp" library="Utils">
+<var>${reg}</var>
+<arg>${reg}</arg>
+<msg timestamp="20230510 09:39:17.576" level="INFO">${reg} = \./u6fs &lt;disk&gt; inode</msg>
+<status status="PASS" starttime="20230510 09:39:17.576" endtime="20230510 09:39:17.576"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${reg}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230510 09:39:17.576" level="INFO">\./u6fs &lt;disk&gt; inode</msg>
+<status status="PASS" starttime="20230510 09:39:17.576" endtime="20230510 09:39:17.576"/>
+</kw>
+<kw name="Should Match Regexp" library="BuiltIn">
+<arg>${res.stdout}</arg>
+<arg>${reg}</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="PASS" starttime="20230510 09:39:17.577" endtime="20230510 09:39:17.577"/>
+</kw>
+<status status="PASS" starttime="20230510 09:39:17.576" endtime="20230510 09:39:17.577"/>
+</iter>
+<iter>
+<var name="${reg}">cat1\s+&lt;.+?&gt;</var>
+<kw name="Convert Regexp" library="Utils">
+<var>${reg}</var>
+<arg>${reg}</arg>
+<msg timestamp="20230510 09:39:17.577" level="INFO">${reg} = \./u6fs &lt;disk&gt; cat1\s+&lt;.+?&gt;</msg>
+<status status="PASS" starttime="20230510 09:39:17.577" endtime="20230510 09:39:17.577"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${reg}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230510 09:39:17.578" level="INFO">\./u6fs &lt;disk&gt; cat1\s+&lt;.+?&gt;</msg>
+<status status="PASS" starttime="20230510 09:39:17.577" endtime="20230510 09:39:17.578"/>
+</kw>
+<kw name="Should Match Regexp" library="BuiltIn">
+<arg>${res.stdout}</arg>
+<arg>${reg}</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="PASS" starttime="20230510 09:39:17.578" endtime="20230510 09:39:17.578"/>
+</kw>
+<status status="PASS" starttime="20230510 09:39:17.577" endtime="20230510 09:39:17.578"/>
+</iter>
+<iter>
+<var name="${reg}">shafiles</var>
+<kw name="Convert Regexp" library="Utils">
+<var>${reg}</var>
+<arg>${reg}</arg>
+<msg timestamp="20230510 09:39:17.579" level="INFO">${reg} = \./u6fs &lt;disk&gt; shafiles</msg>
+<status status="PASS" starttime="20230510 09:39:17.578" endtime="20230510 09:39:17.579"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${reg}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230510 09:39:17.579" level="INFO">\./u6fs &lt;disk&gt; shafiles</msg>
+<status status="PASS" starttime="20230510 09:39:17.579" endtime="20230510 09:39:17.579"/>
+</kw>
+<kw name="Should Match Regexp" library="BuiltIn">
+<arg>${res.stdout}</arg>
+<arg>${reg}</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="PASS" starttime="20230510 09:39:17.579" endtime="20230510 09:39:17.579"/>
+</kw>
+<status status="PASS" starttime="20230510 09:39:17.578" endtime="20230510 09:39:17.579"/>
+</iter>
+<iter>
+<var name="${reg}">tree</var>
+<kw name="Convert Regexp" library="Utils">
+<var>${reg}</var>
+<arg>${reg}</arg>
+<msg timestamp="20230510 09:39:17.580" level="INFO">${reg} = \./u6fs &lt;disk&gt; tree</msg>
+<status status="PASS" starttime="20230510 09:39:17.580" endtime="20230510 09:39:17.580"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${reg}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230510 09:39:17.580" level="INFO">\./u6fs &lt;disk&gt; tree</msg>
+<status status="PASS" starttime="20230510 09:39:17.580" endtime="20230510 09:39:17.580"/>
+</kw>
+<kw name="Should Match Regexp" library="BuiltIn">
+<arg>${res.stdout}</arg>
+<arg>${reg}</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="PASS" starttime="20230510 09:39:17.580" endtime="20230510 09:39:17.580"/>
+</kw>
+<status status="PASS" starttime="20230510 09:39:17.579" endtime="20230510 09:39:17.581"/>
+</iter>
+<iter>
+<var name="${reg}">fuse\s+&lt;.+?&gt;</var>
+<kw name="Convert Regexp" library="Utils">
+<var>${reg}</var>
+<arg>${reg}</arg>
+<msg timestamp="20230510 09:39:17.581" level="INFO">${reg} = \./u6fs &lt;disk&gt; fuse\s+&lt;.+?&gt;</msg>
+<status status="PASS" starttime="20230510 09:39:17.581" endtime="20230510 09:39:17.581"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${reg}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230510 09:39:17.581" level="INFO">\./u6fs &lt;disk&gt; fuse\s+&lt;.+?&gt;</msg>
+<status status="PASS" starttime="20230510 09:39:17.581" endtime="20230510 09:39:17.581"/>
+</kw>
+<kw name="Should Match Regexp" library="BuiltIn">
+<arg>${res.stdout}</arg>
+<arg>${reg}</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="PASS" starttime="20230510 09:39:17.581" endtime="20230510 09:39:17.582"/>
+</kw>
+<status status="PASS" starttime="20230510 09:39:17.581" endtime="20230510 09:39:17.582"/>
+</iter>
+<iter>
+<var name="${reg}">bm</var>
+<kw name="Convert Regexp" library="Utils">
+<var>${reg}</var>
+<arg>${reg}</arg>
+<msg timestamp="20230510 09:39:17.582" level="INFO">${reg} = \./u6fs &lt;disk&gt; bm</msg>
+<status status="PASS" starttime="20230510 09:39:17.582" endtime="20230510 09:39:17.582"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${reg}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230510 09:39:17.582" level="INFO">\./u6fs &lt;disk&gt; bm</msg>
+<status status="PASS" starttime="20230510 09:39:17.582" endtime="20230510 09:39:17.582"/>
+</kw>
+<kw name="Should Match Regexp" library="BuiltIn">
+<arg>${res.stdout}</arg>
+<arg>${reg}</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="PASS" starttime="20230510 09:39:17.582" endtime="20230510 09:39:17.583"/>
+</kw>
+<status status="PASS" starttime="20230510 09:39:17.582" endtime="20230510 09:39:17.583"/>
+</iter>
+<status status="PASS" starttime="20230510 09:39:17.574" endtime="20230510 09:39:17.583"/>
+</for>
+<status status="PASS" starttime="20230510 09:39:17.562" endtime="20230510 09:39:17.583"/>
+</kw>
+<doc>Shows available commands on invalid command</doc>
+<status status="PASS" starttime="20230510 09:39:17.561" endtime="20230510 09:39:17.583"/>
+</test>
+<test id="s1-t2" name="Invalid file bm" line="25">
+<kw name="U6fs Run" library="U6fsUtils">
+<arg>./foo.u6fs</arg>
+<arg>bm</arg>
+<arg>expected_ret=ERR_IO</arg>
+<doc>Run the u6fs executable and gives the arguments as parameters.</doc>
+<msg timestamp="20230510 09:39:17.584" level="INFO">Starting process:
+./u6fs ./foo.u6fs bm</msg>
+<msg timestamp="20230510 09:39:17.586" level="INFO">Waiting for process to complete.</msg>
+<msg timestamp="20230510 09:39:17.595" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20230510 09:39:17.584" endtime="20230510 09:39:17.595"/>
+</kw>
+<doc>bm returns error with invalid file</doc>
+<status status="PASS" starttime="20230510 09:39:17.584" endtime="20230510 09:39:17.595"/>
+</test>
+<test id="s1-t3" name="Bm simple" line="28">
+<kw name="Bm template">
+<arg>simple</arg>
+<doc>Template for the test of u6fs bm</doc>
+<kw name="U6fs Run" library="U6fsUtils">
+<arg>${DATA_DIR}/${name}.uv6</arg>
+<arg>bm</arg>
+<arg>expected_ret=ERR_NONE</arg>
+<arg>expected_file=${DATA_DIR}/${name}_bm.txt</arg>
+<doc>Run the u6fs executable and gives the arguments as parameters.</doc>
+<msg timestamp="20230510 09:39:17.597" level="INFO">Starting process:
+./u6fs ../provided/tests/data/simple.uv6 bm</msg>
+<msg timestamp="20230510 09:39:17.600" level="INFO">Waiting for process to complete.</msg>
+<msg timestamp="20230510 09:39:17.609" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20230510 09:39:17.597" endtime="20230510 09:39:17.610"/>
+</kw>
+<status status="PASS" starttime="20230510 09:39:17.596" endtime="20230510 09:39:17.610"/>
+</kw>
+<doc>bm with simple.uv6 has correct behaviour</doc>
+<status status="PASS" starttime="20230510 09:39:17.596" endtime="20230510 09:39:17.610"/>
+</test>
+<test id="s1-t4" name="Bm first" line="31">
+<kw name="Bm template">
+<arg>first</arg>
+<doc>Template for the test of u6fs bm</doc>
+<kw name="U6fs Run" library="U6fsUtils">
+<arg>${DATA_DIR}/${name}.uv6</arg>
+<arg>bm</arg>
+<arg>expected_ret=ERR_NONE</arg>
+<arg>expected_file=${DATA_DIR}/${name}_bm.txt</arg>
+<doc>Run the u6fs executable and gives the arguments as parameters.</doc>
+<msg timestamp="20230510 09:39:17.612" level="INFO">Starting process:
+./u6fs ../provided/tests/data/first.uv6 bm</msg>
+<msg timestamp="20230510 09:39:17.614" level="INFO">Waiting for process to complete.</msg>
+<msg timestamp="20230510 09:39:17.624" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20230510 09:39:17.611" endtime="20230510 09:39:17.624"/>
+</kw>
+<status status="PASS" starttime="20230510 09:39:17.611" endtime="20230510 09:39:17.625"/>
+</kw>
+<doc>bm with first.uv6 has correct behaviour</doc>
+<status status="PASS" starttime="20230510 09:39:17.611" endtime="20230510 09:39:17.625"/>
+</test>
+<test id="s1-t5" name="Bm aiw" line="34">
+<kw name="Bm template">
+<arg>aiw</arg>
+<doc>Template for the test of u6fs bm</doc>
+<kw name="U6fs Run" library="U6fsUtils">
+<arg>${DATA_DIR}/${name}.uv6</arg>
+<arg>bm</arg>
+<arg>expected_ret=ERR_NONE</arg>
+<arg>expected_file=${DATA_DIR}/${name}_bm.txt</arg>
+<doc>Run the u6fs executable and gives the arguments as parameters.</doc>
+<msg timestamp="20230510 09:39:17.627" level="INFO">Starting process:
+./u6fs ../provided/tests/data/aiw.uv6 bm</msg>
+<msg timestamp="20230510 09:39:17.630" level="INFO">Waiting for process to complete.</msg>
+<msg timestamp="20230510 09:39:17.641" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20230510 09:39:17.626" endtime="20230510 09:39:17.641"/>
+</kw>
+<status status="PASS" starttime="20230510 09:39:17.626" endtime="20230510 09:39:17.642"/>
+</kw>
+<doc>bm with aiw.uv6 has correct behaviour</doc>
+<status status="PASS" starttime="20230510 09:39:17.626" endtime="20230510 09:39:17.642"/>
+</test>
+<status status="PASS" starttime="20230510 09:39:17.519" endtime="20230510 09:39:17.643"/>
+</suite>
+<statistics>
+<total>
+<stat pass="5" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="5" fail="0" skip="0" id="s1" name="Week10">Week10</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

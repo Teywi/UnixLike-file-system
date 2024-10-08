@@ -1,0 +1,17 @@
+u6fs.o: u6fs.c error.h mount.h unixv6fs.h bmblock.h u6fs_utils.h inode.h \
+  direntv6.h filev6.h
+error.o: error.c
+u6fs_utils.o: u6fs_utils.c mount.h unixv6fs.h bmblock.h sector.h error.h \
+  u6fs_utils.h filev6.h inode.h
+mount.o: mount.c error.h mount.h unixv6fs.h bmblock.h sector.h inode.h
+sector.o: sector.c error.h unixv6fs.h
+inode.o: inode.c error.h unixv6fs.h sector.h inode.h mount.h bmblock.h
+filev6.o: filev6.c error.h unixv6fs.h filev6.h mount.h bmblock.h inode.h \
+  sector.h
+direntv6.o: direntv6.c error.h filev6.h unixv6fs.h mount.h bmblock.h \
+  direntv6.h inode.h
+u6fs_fuse.o: u6fs_fuse.c /usr/include/fuse/fuse.h \
+  /usr/include/fuse/fuse_common.h /usr/include/fuse/fuse_opt.h mount.h \
+  unixv6fs.h bmblock.h error.h inode.h direntv6.h filev6.h u6fs_utils.h \
+  u6fs_fuse.h util.h
+bmblock.o: bmblock.c bmblock.h error.h unixv6fs.h
